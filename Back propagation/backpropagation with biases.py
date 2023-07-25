@@ -81,12 +81,12 @@ def gradctot(tval):
     return gradWtot, gradBtot
 
 def adjustment(val,eps):
-    c=a
-    d=b
-    tot=np.zeros((15,1))
-    aadj,badj=gradctot(val)
-    tot[0:9]=aadj
-    tot[8:14]=badj
+    c=W
+    d=B
+    tot=np.zeros((25,1))
+    Wadj,Badj=gradctot(val)
+    tot[0:18]=Wadj
+    tot[17:]=badj
     lengh=np.linalg.norm(tot)
     W[0]=W[0]-(Wadj[0]/lengh)*eps
     W[1]=W[1]-(Wadj[1]/lengh)*eps
@@ -125,7 +125,7 @@ def train(set,eps):
     while ctt(set)>0.0:#abs(errold-errnew)>0.01 and n<=10000:
         if errold-errnew<0:
             eps=eps/2
-        a,b,change,leng =adjustment(set,eps)
+        W,B,change,leng =adjustment(set,eps)
         errold=errnew
         errnew=ctt(set)
         print([n,change,float(errnew), leng, eps])
@@ -138,7 +138,7 @@ def train(set,eps):
         n+=1
     plt.plot(H)
     plt.show()
-    return a,b
+    return W,B
 print(train(tset2,20))
 #print(adjustment(tset,0.1))
 print(evalnn(tset2[0][0:3]))
