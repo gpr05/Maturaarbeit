@@ -44,9 +44,20 @@ def gradc(tval):
     gradW=np.zeros((18,1))
     gradB=np.zeros((8,1))
     re,li=evalnn(tval[0:3])
-    gradW[0]= (re-ret)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
-                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
-                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]+fder(G*W[1]+B[1])*W[4]+fder(b*W[2]+B[2])*W[5]))          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[0]= (re-ret)*fder(
+        f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
+        f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
+        f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(
+        (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*R+fder(G*W[1]+B[1])*W[4]*0+fder(b*W[2]+B[2])*W[5]*0))+
+        (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*R+fder(G*W[1]+B[1])*W[7]*0+fder(b*W[2]+B[2])*W[8]*0))+
+        (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*R+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*0)))+(li-lit)*fder(
+            f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
+            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]+
+            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]+B[7])*(
+            (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*R+fder(G*W[1]+B[1])*W[4]*0+fder(b*W[2]+B[2])*W[5]*0))+
+            (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*R+fder(G*W[1]+B[1])*W[7]*0+fder(b*W[2]+B[2])*W[8]*0))+
+            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*R+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*0)))
+
     gradW[1]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
     gradW[2]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
     gradW[3]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
@@ -88,10 +99,10 @@ def gradctot(tval):
 def adjustment(val,eps):
     c=W
     d=B
-    tot=np.zeros((25,1))
+    tot=np.zeros((26,1))
     Wadj,Badj=gradctot(val)
     tot[0:18]=Wadj
-    tot[17:26]=Badj
+    tot[17:27]=Badj
     lengh=np.linalg.norm(tot)
     W[0]=W[0]-(Wadj[0]/lengh)*eps
     W[1]=W[1]-(Wadj[1]/lengh)*eps
