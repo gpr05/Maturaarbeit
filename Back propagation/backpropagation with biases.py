@@ -38,59 +38,47 @@ def gradc(tval):
     B=tval[2]
     ret=tval[3]
     lit=tval[4]
-    gradb=np.zeros((6,1))
-    grada=np.zeros((9,1))
+    gradW=np.zeros((18,1))
+    gradB=np.zeros((8,1))
     re,li=evalnn(tval[0:3])
-    gradb[0]=(re-ret)*(R*a[0]+G*a[1]+B*a[2])
-    gradb[1]=(re-ret)*(R*a[3]+G*a[4]+B*a[5])
-    gradb[2]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])
-    gradb[3]=(li-lit)*(R*a[0]+G*a[1]+B*a[2])
-    gradb[4]=(li-lit)*(R*a[3]+G*a[4]+B*a[5])
-    gradb[5]=(li-lit)*(R*a[6]+G*a[7]+B*a[8])
+    gradW[0]= (re-ret)*(R*a[0]+G*a[1]+B*a[2])+(li-lit)
+    gradW[1]= (re-ret)*(R*a[3]+G*a[4]+B*a[5])+(li-lit)
+    gradW[2]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[3]= (re-ret)*(R*a[0]+G*a[1]+B*a[2])+(li-lit)
+    gradW[4]= (re-ret)*(R*a[3]+G*a[4]+B*a[5])+(li-lit)
+    gradW[5]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[6]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[7]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[8]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[9]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[10]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[11]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[12]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[13]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[14]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[15]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[16]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[17]=(li-lit)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
 
-    grada[0]=(re-ret)*R*b[0]+(li-lit)*R*b[3]
-    grada[1]=(re-ret)*G*b[0]+(li-lit)*G*b[3]
-    grada[2]=(re-ret)*B*b[0]+(li-lit)*B*b[3]
-    grada[3]=(re-ret)*R*b[1]+(li-lit)*R*b[4]
-    grada[4]=(re-ret)*G*b[1]+(li-lit)*G*b[4]
-    grada[5]=(re-ret)*B*b[1]+(li-lit)*B*b[4]
-    grada[6]=(re-ret)*R*b[2]+(li-lit)*R*b[5]
-    grada[7]=(re-ret)*G*b[2]+(li-lit)*G*b[5]
-    grada[8]=(re-ret)*B*b[2]+(li-lit)*B*b[5]
-    return grada, gradb
+    gradB[0]=(re-ret)*R*b[0]+(li-lit)*R*b[3]
+    gradB[1]=(re-ret)*G*b[0]+(li-lit)*G*b[3]
+    gradB[2]=(re-ret)*B*b[0]+(li-lit)*B*b[3]
+    gradB[3]=(re-ret)*R*b[1]+(li-lit)*R*b[4]
+    gradB[4]=(re-ret)*G*b[1]+(li-lit)*G*b[4]
+    gradB[5]=(re-ret)*B*b[1]+(li-lit)*B*b[4]
+    gradB[6]=(re-ret)*R*b[2]+(li-lit)*R*b[5]
+    gradB[7]=(re-ret)*G*b[2]+(li-lit)*G*b[5]
+    return gradW, gradB
 
 def gradctot(tval):
 
-    gradbtot=np.zeros((6,1))
-    gradatot=np.zeros((9,1))
+    gradWtot=np.zeros((17,1))
+    gradBtot=np.zeros((8,1))
     for i in tval :#range(3):
-        grada, gradb =gradc(i)
-        gradatot+=grada
-        gradbtot+=gradb
-        '''
-        R=tval[i][0]
-        G=tval[i][1]
-        B=tval[i][2]
-        ret=tval[i][3]
-        lit=tval[i][4]
-        re,li=evalnn(tval[i][0:3])
-        gradbtot[0]+=(re-ret)*(R*a[0]+G*a[1]+B*a[2])+(li-lit)*0
-        gradbtot[1]+=(re-ret)*(R*a[3]+G*a[4]+B*a[5])
-        gradbtot[2]+=(re-ret)*(R*a[6]+G*a[7]+B*a[8])
-        gradbtot[3]+=(li-lit)*(R*a[0]+G*a[1]+B*a[2])
-        gradbtot[4]+=(li-lit)*(R*a[3]+G*a[4]+B*a[5])
-        gradbtot[5]+=(li-lit)*(R*a[6]+G*a[7]+B*a[8])
-
-        gradatot[0]+=(re-ret)*R*b[0]+(li-lit)*R*b[3]
-        gradatot[1]+=(re-ret)*G*b[0]+(li-lit)*G*b[3]
-        gradatot[2]+=(re-ret)*B*b[0]+(li-lit)*B*b[3]
-        gradatot[3]+=(re-ret)*R*b[1]+(li-lit)*R*b[4]
-        gradatot[4]+=(re-ret)*G*b[1]+(li-lit)*G*b[4]
-        gradatot[5]+=(re-ret)*B*b[1]+(li-lit)*B*b[4]
-        gradatot[6]+=(re-ret)*R*b[2]+(li-lit)*R*b[5]
-        gradatot[7]+=(re-ret)*G*b[2]+(li-lit)*G*b[5]
-        gradatot[8]+=(re-ret)*B*b[2]+(li-lit)*B*b[5]'''
-    return gradatot, gradbtot
+        gradW, gradB =gradc(i)
+        gradWtot+=gradW
+        gradBtot+=gradB
+    return gradWtot, gradBtot
 
 def adjustment(val,eps):
     c=a
@@ -100,24 +88,34 @@ def adjustment(val,eps):
     tot[0:9]=aadj
     tot[8:14]=badj
     lengh=np.linalg.norm(tot)
-    a[0]= a[0]-(aadj[0]/lengh)*eps
-    a[1]= a[1]-(aadj[1]/lengh)*eps
-    a[2]= a[2]-(aadj[2]/lengh)*eps
-    a[3]= a[3]-(aadj[3]/lengh)*eps
-    a[4]= a[4]-(aadj[4]/lengh)*eps
-    a[5]= a[5]-(aadj[5]/lengh)*eps
-    a[6]= a[6]-(aadj[6]/lengh)*eps
-    a[7]= a[7]-(aadj[7]/lengh)*eps
-    a[8]= a[8]-(aadj[8]/lengh)*eps
-
-    b[0]= b[0]-(badj[0]/lengh)*eps
-    b[1]= b[1]-(badj[1]/lengh)*eps
-    b[2]= b[2]-(badj[2]/lengh)*eps
-    b[3]= b[3]-(badj[3]/lengh)*eps
-    b[4]= b[4]-(badj[4]/lengh)*eps
-    b[5]= b[5]-(badj[5]/lengh)*eps
-    middelta=(np.mean(a-c)+np.mean(b-d))/2
-    return a,b,middelta, lengh
+    W[0]=W[0]-(Wadj[0]/lengh)*eps
+    W[1]=W[1]-(Wadj[1]/lengh)*eps
+    W[2]=W[2]-(Wadj[2]/lengh)*eps
+    W[3]=W[3]-(Wadj[3]/lengh)*eps
+    W[4]=  W[4]-(Wadj[]/lengh)*eps
+    W[5]=  W[5]-(Wadj[]/lengh)*eps
+    W[6]=  W[6]-(Wadj[]/lengh)*eps
+    W[7]=  W[7]-(Wadj[]/lengh)*eps
+    W[8]=  W[8]-(Wadj[]/lengh)*eps
+    W[9]=  W[9]-(Wadj[]/lengh)*eps
+    W[10]=W[10]-(Wadj[]/lengh)*eps
+    W[11]=W[11]-(Wadj[]/lengh)*eps
+    W[12]=W[12]-(Wadj[]/lengh)*eps
+    W[13]=W[13]-(Wadj[]/lengh)*eps
+    W[14]=W[14]-(Wadj[]/lengh)*eps
+    W[15]=W[15]-(Wadj[]/lengh)*eps
+    W[16]=W[16]-(Wadj[]/lengh)*eps
+    W[17]=W[17]-(Wadj[]/lengh)*eps
+    B[0]=  B[1]-(Badj[]/lengh)*eps
+    B[1]=  B[2]-(Badj[]/lengh)*eps
+    B[2]=  B[3]-(Badj[]/lengh)*eps
+    B[3]=  B[4]-(Badj[]/lengh)*eps
+    B[4]=  B[5]-(Badj[]/lengh)*eps
+    B[5]=  B[6]-(Badj[]/lengh)*eps
+    B[6]=  B[7]-(Badj[]/lengh)*eps
+    B[7]=  B[8]-(Badj[]/lengh)*eps
+    middelta=(np.mean(W-c)+np.mean(B-d))/2
+    return W,B,middelta, lengh
 
 def train(set,eps):
     errold=ctt(set)
