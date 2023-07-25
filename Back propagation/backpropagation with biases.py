@@ -13,7 +13,7 @@ tset2=[[122,200,10,524.3120897791999, 533.6532256],[100, 100, 180,456.66741616, 
 def f(x):
     return x
 
-def fder(d):
+def fder(x):
     return 1
 
 def evalnn(rgb):
@@ -38,39 +38,41 @@ def ctt(tval):
 def gradc(tval):
     R=tval[0]
     G=tval[1]
-    B=tval[2]
+    b=tval[2]
     ret=tval[3]
     lit=tval[4]
     gradW=np.zeros((18,1))
     gradB=np.zeros((8,1))
     re,li=evalnn(tval[0:3])
-    gradW[0]= (re-ret)*(R*a[0]+G*a[1]+B*a[2])+(li-lit)
-    gradW[1]= (re-ret)*(R*a[3]+G*a[4]+B*a[5])+(li-lit)
-    gradW[2]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[3]= (re-ret)*(R*a[0]+G*a[1]+B*a[2])+(li-lit)
-    gradW[4]= (re-ret)*(R*a[3]+G*a[4]+B*a[5])+(li-lit)
-    gradW[5]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[6]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[7]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[8]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[9]= (re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[10]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[11]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[12]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[13]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[14]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[15]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[16]=(re-ret)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
-    gradW[17]=(li-lit)*(R*a[6]+G*a[7]+B*a[8])+(li-lit)
+    gradW[0]= (re-ret)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
+                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
+                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]+fder(G*W[1]+B[1])*W[4]+fder(b*W[2]+B[2])*W[5]))          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[1]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[2]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[3]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[4]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[5]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[6]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[7]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[8]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[9]= (re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[10]=(re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[11]=(re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[12]=(re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[13]=(re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[14]=(re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[15]=(re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[16]=(re-ret)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
+    gradW[17]=(li-lit)*          (R*W[]+G*W[]+b*W[]+B[])+(li-lit)*                  (R*W[]+G*W[]*b*W[]+B[])
 
-    gradB[0]=(re-ret)*R*b[0]+(li-lit)*R*b[3]
-    gradB[1]=(re-ret)*G*b[0]+(li-lit)*G*b[3]
-    gradB[2]=(re-ret)*B*b[0]+(li-lit)*B*b[3]
-    gradB[3]=(re-ret)*R*b[1]+(li-lit)*R*b[4]
-    gradB[4]=(re-ret)*G*b[1]+(li-lit)*G*b[4]
-    gradB[5]=(re-ret)*B*b[1]+(li-lit)*B*b[4]
-    gradB[6]=(re-ret)*R*b[2]+(li-lit)*R*b[5]
-    gradB[7]=(re-ret)*G*b[2]+(li-lit)*G*b[5]
+    gradB[0]=(re-ret)*           R*W[0]+                 (li-lit)*                   R*W[3]
+    gradB[1]=(re-ret)*           G*W[0]+                 (li-lit)*                   G*W[3]
+    gradB[2]=(re-ret)*           B*W[0]+                 (li-lit)*                   B*W[3]
+    gradB[3]=(re-ret)*           R*W[1]+                 (li-lit)*                   R*W[4]
+    gradB[4]=(re-ret)*           G*W[1]+                 (li-lit)*                   G*W[4]
+    gradB[5]=(re-ret)*           B*W[1]+                 (li-lit)*                   B*W[4]
+    gradB[6]=(re-ret)*           R*W[2]+                 (li-lit)*                   R*W[5]
+    gradB[7]=(re-ret)*           G*W[2]+                 (li-lit)*                   G*W[5]
     return gradW, gradB
 
 def gradctot(tval):
