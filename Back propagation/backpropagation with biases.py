@@ -1,3 +1,4 @@
+import base64
 import numpy as np
 import matplotlib.pylab as plt
 
@@ -328,34 +329,36 @@ def adjustment(val,eps):
     W[1]=W[1]-(Wadj[1]/lengh)*eps
     W[2]=W[2]-(Wadj[2]/lengh)*eps
     W[3]=W[3]-(Wadj[3]/lengh)*eps
-    W[4]=  W[4]-(Wadj[]/lengh)*eps
-    W[5]=  W[5]-(Wadj[]/lengh)*eps
-    W[6]=  W[6]-(Wadj[]/lengh)*eps
-    W[7]=  W[7]-(Wadj[]/lengh)*eps
-    W[8]=  W[8]-(Wadj[]/lengh)*eps
-    W[9]=  W[9]-(Wadj[]/lengh)*eps
-    W[10]=W[10]-(Wadj[]/lengh)*eps
-    W[11]=W[11]-(Wadj[]/lengh)*eps
-    W[12]=W[12]-(Wadj[]/lengh)*eps
-    W[13]=W[13]-(Wadj[]/lengh)*eps
-    W[14]=W[14]-(Wadj[]/lengh)*eps
-    W[15]=W[15]-(Wadj[]/lengh)*eps
-    W[16]=W[16]-(Wadj[]/lengh)*eps
-    W[17]=W[17]-(Wadj[]/lengh)*eps
-    B[0]=  B[1]-(Badj[]/lengh)*eps
-    B[1]=  B[2]-(Badj[]/lengh)*eps
-    B[2]=  B[3]-(Badj[]/lengh)*eps
-    B[3]=  B[4]-(Badj[]/lengh)*eps
-    B[4]=  B[5]-(Badj[]/lengh)*eps
-    B[5]=  B[6]-(Badj[]/lengh)*eps
-    B[6]=  B[7]-(Badj[]/lengh)*eps
-    B[7]=  B[8]-(Badj[]/lengh)*eps
+    W[4]=  W[4]-(Wadj[4]/lengh)*eps
+    W[5]=  W[5]-(Wadj[5]/lengh)*eps
+    W[6]=  W[6]-(Wadj[6]/lengh)*eps
+    W[7]=  W[7]-(Wadj[7]/lengh)*eps
+    W[8]=  W[8]-(Wadj[8]/lengh)*eps
+    W[9]=  W[9]-(Wadj[9]/lengh)*eps
+    W[10]=W[10]-(Wadj[10]/lengh)*eps
+    W[11]=W[11]-(Wadj[11]/lengh)*eps
+    W[12]=W[12]-(Wadj[12]/lengh)*eps
+    W[13]=W[13]-(Wadj[13]/lengh)*eps
+    W[14]=W[14]-(Wadj[14]/lengh)*eps
+    W[15]=W[15]-(Wadj[15]/lengh)*eps
+    W[16]=W[16]-(Wadj[16]/lengh)*eps
+    W[17]=W[17]-(Wadj[17]/lengh)*eps
+    B[0]=  B[1]-(Badj[0]/lengh)*eps
+    B[1]=  B[2]-(Badj[2]/lengh)*eps
+    B[2]=  B[3]-(Badj[2]/lengh)*eps
+    B[3]=  B[4]-(Badj[3]/lengh)*eps
+    B[4]=  B[5]-(Badj[4]/lengh)*eps
+    B[5]=  B[6]-(Badj[5]/lengh)*eps
+    B[6]=  B[7]-(Badj[6]/lengh)*eps
+    B[7]=  B[8]-(Badj[7]/lengh)*eps
     middelta=(np.mean(W-c)+np.mean(B-d))/2
     return W,B,middelta, lengh
 
 def train(set,eps):
     errold=ctt(set)
     errnew=0
+    W=None
+    B=None
     n=0
     H=[]
     while ctt(set)>0.0:#abs(errold-errnew)>0.01 and n<=10000:

@@ -119,6 +119,8 @@ def adjustment(val,eps):
 def train(set,eps):
     errold=ctt(set)
     errnew=0
+    a=None
+    b=None
     n=0
     H=[]
     while ctt(set)>0.0:#abs(errold-errnew)>0.01 and n<=10000:
