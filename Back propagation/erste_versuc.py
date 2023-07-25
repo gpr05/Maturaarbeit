@@ -138,6 +138,7 @@ def train(set,eps):
     plt.plot(H)
     plt.show()
     return a,b
+
 print(train(tset2,20))
 #print(adjustment(tset,0.1))
 print(evalnn(tset2[0][0:3]))
