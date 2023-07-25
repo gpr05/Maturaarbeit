@@ -13,6 +13,9 @@ tset2=[[122,200,10,524.3120897791999, 533.6532256],[100, 100, 180,456.66741616, 
 def f(x):
     return x
 
+def fder(d):
+    return 1
+
 def evalnn(rgb):
     re=f(f(f(rgb[0]*W[0]+B[0])*W[3]+f(rgb[1]*W[1]+B[1])*W[4]+f(rgb[2]*W[2]+B[2])*W[5]+B[3])*W[12]+
          f(f(rgb[0]*W[0]+B[0])*W[6]+f(rgb[1]*W[1]+B[1])*W[7]+f(rgb[2]*W[2]+B[2])*W[8]+B[4])*W[13]+
@@ -86,7 +89,7 @@ def adjustment(val,eps):
     tot=np.zeros((25,1))
     Wadj,Badj=gradctot(val)
     tot[0:18]=Wadj
-    tot[17:]=badj
+    tot[17:26]=Badj
     lengh=np.linalg.norm(tot)
     W[0]=W[0]-(Wadj[0]/lengh)*eps
     W[1]=W[1]-(Wadj[1]/lengh)*eps
