@@ -218,79 +218,37 @@ def gradc(tval):
                             f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(
                             (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
                             (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))+(li-lit)*fder(
-
-                            f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
-                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]+
-                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]+B[7])*(
-                            (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
-                            (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
+                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
 
     gradW[13]=(re-ret)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
                             f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
                             f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(
                             (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
                             (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))+(li-lit)*fder(
-
-                            f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
-                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]+
-                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]+B[7])*(
-                            (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
-                            (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
+                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
 
     gradW[14]=(re-ret)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
                             f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
                             f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(
                             (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
                             (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))+(li-lit)*fder(
+                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
 
-                            f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
+    gradW[15]=(li-lit)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
                             f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]+
                             f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]+B[7])*(
                             (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
                             (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
                             (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
 
-    gradW[15]=(re-ret)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
-                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
-                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(
-                            (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
-                            (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))+(li-lit)*fder(
-
-                            f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
+    gradW[16]=(li-lit)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
                             f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]+
                             f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]+B[7])*(
                             (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
                             (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
                             (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
 
-    gradW[16]=(re-ret)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
-                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
-                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(
-                            (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
-                            (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))+(li-lit)*fder(
-
-                            f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
-                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]+
-                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]+B[7])*(
-                            (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
-                            (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))
-
-    gradW[17]=(re-ret)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]+
-                            f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]+
-                            f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]+B[6])*(
-                            (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[12]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
-                            (fder(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[13]*(fder(R*W[0]+B[0])*W[6]*  0+fder(G*W[1]+B[1])*W[7]* 0+fder(b*W[2]+B[2])*W[8]* b))+
-                            (fder(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[14]*(fder(R*W[0]+B[0])*W[9]*0+fder(G*W[1]+B[1])*W[10]*0+fder(b*W[2]+B[2])*W[11]*b)))+(li-lit)*fder(
-
-                            f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
+    gradW[17]=(li-lit)*fder(f(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]+
                             f(f(R*W[0]+B[0])*W[6]+f(G*W[1]+B[1])*W[7]+f(b*W[2]+B[2])*W[8]+B[4])*W[16]+
                             f(f(R*W[0]+B[0])*W[9]+f(G*W[1]+B[1])*W[10]+f(b*W[2]+B[2])*W[11]+B[5])*W[17]+B[7])*(
                             (fder(f(R*W[0]+B[0])*W[3]+f(G*W[1]+B[1])*W[4]+f(b*W[2]+B[2])*W[5]+B[3])*W[15]*(fder(R*W[0]+B[0])*W[3]*  0+fder(G*W[1]+B[1])*W[4]* 0+fder(b*W[2]+B[2])*W[5]* b))+
@@ -299,17 +257,17 @@ def gradc(tval):
 
     gradB[0]=(re-ret)*           R*W[0]+                 (li-lit)*                   R*W[3]
     gradB[1]=(re-ret)*           G*W[0]+                 (li-lit)*                   G*W[3]
-    gradB[2]=(re-ret)*           B*W[0]+                 (li-lit)*                   B*W[3]
+    gradB[2]=(re-ret)*           b*W[0]+                 (li-lit)*                   b*W[3]
     gradB[3]=(re-ret)*           R*W[1]+                 (li-lit)*                   R*W[4]
     gradB[4]=(re-ret)*           G*W[1]+                 (li-lit)*                   G*W[4]
-    gradB[5]=(re-ret)*           B*W[1]+                 (li-lit)*                   B*W[4]
+    gradB[5]=(re-ret)*           b*W[1]+                 (li-lit)*                   b*W[4]
     gradB[6]=(re-ret)*           R*W[2]+                 (li-lit)*                   R*W[5]
     gradB[7]=(re-ret)*           G*W[2]+                 (li-lit)*                   G*W[5]
     return gradW, gradB
 
 def gradctot(tval):
 
-    gradWtot=np.zeros((17,1))
+    gradWtot=np.zeros((18,1))
     gradBtot=np.zeros((8,1))
     for i in tval :#range(3):
         gradW, gradB =gradc(i)
@@ -323,7 +281,7 @@ def adjustment(val,eps):
     tot=np.zeros((26,1))
     Wadj,Badj=gradctot(val)
     tot[0:18]=Wadj
-    tot[17:27]=Badj
+    tot[17:25]=Badj
     lengh=np.linalg.norm(tot)
     W[0]=W[0]-(Wadj[0]/lengh)*eps
     W[1]=W[1]-(Wadj[1]/lengh)*eps
@@ -343,14 +301,14 @@ def adjustment(val,eps):
     W[15]=W[15]-(Wadj[15]/lengh)*eps
     W[16]=W[16]-(Wadj[16]/lengh)*eps
     W[17]=W[17]-(Wadj[17]/lengh)*eps
-    B[0]=  B[1]-(Badj[0]/lengh)*eps
-    B[1]=  B[2]-(Badj[2]/lengh)*eps
-    B[2]=  B[3]-(Badj[2]/lengh)*eps
-    B[3]=  B[4]-(Badj[3]/lengh)*eps
-    B[4]=  B[5]-(Badj[4]/lengh)*eps
-    B[5]=  B[6]-(Badj[5]/lengh)*eps
-    B[6]=  B[7]-(Badj[6]/lengh)*eps
-    B[7]=  B[8]-(Badj[7]/lengh)*eps
+    B[0]=  B[0]-(Badj[0]/lengh)*eps
+    B[1]=  B[1]-(Badj[2]/lengh)*eps
+    B[2]=  B[2]-(Badj[2]/lengh)*eps
+    B[3]=  B[3]-(Badj[3]/lengh)*eps
+    B[4]=  B[4]-(Badj[4]/lengh)*eps
+    B[5]=  B[5]-(Badj[5]/lengh)*eps
+    B[6]=  B[6]-(Badj[6]/lengh)*eps
+    B[7]=  B[7]-(Badj[7]/lengh)*eps
     middelta=(np.mean(W-c)+np.mean(B-d))/2
     return W,B,middelta, lengh
 
@@ -361,7 +319,7 @@ def train(set,eps):
     B=None
     n=0
     H=[]
-    while ctt(set)>0.0:#abs(errold-errnew)>0.01 and n<=10000:
+    while ctt(set)>0.0 and eps>10**-10:#abs(errold-errnew)>0.01 and n<=10000:
         if errold-errnew<0:
             eps=eps/2
         W,B,change,leng =adjustment(set,eps)

@@ -123,7 +123,7 @@ def train(set,eps):
     b=None
     n=0
     H=[]
-    while ctt(set)>0.0:#abs(errold-errnew)>0.01 and n<=10000:
+    while ctt(set)>0.0 and eps>10**-16:#abs(errold-errnew)>0.01 and n<=10000:
         if errold-errnew<0:
             eps=eps/2
         a,b,change,leng =adjustment(set,eps)
