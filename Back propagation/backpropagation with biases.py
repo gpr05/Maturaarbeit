@@ -2,6 +2,7 @@ import base64
 import numpy as np
 import matplotlib.pylab as plt
 import keyboard
+import pandas
 
 #erste versuch in training
 #
@@ -406,10 +407,11 @@ def train(set,eps):
     H=[]
     while ctt(set)>100.0 and  keyboard.is_pressed('q')==False:# and n<100000 :#and eps>10**-10:#abs(errold-errnew)>0.01 and n<=10000:
         if errold-errnew<0:
-            eps=eps/1
+            eps=eps/2
         W,B,change,leng =adjustment(set,eps)
         errold=errnew
         errnew=ctt(set)
+        #pandas.
         print([n,change,float(errnew), leng, eps])
         H.append([float(errnew),leng])
 
@@ -421,7 +423,7 @@ def train(set,eps):
     plt.plot(H)
     plt.show()
     return W,B
-print(train(tset2,0.0001))
+print(train(tset2,20))
 #print(adjustment(tset,0.1))
 print(evalnn(tset2[0][0:3]))
 print(evalnn(tset2[1][0:3]))
