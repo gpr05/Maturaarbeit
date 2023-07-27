@@ -404,7 +404,6 @@ def train(set,eps):
     B=None
     n=0
     H=[]
-
     while ctt(set)>100.0 and  keyboard.is_pressed('q')==False:# and n<100000 :#and eps>10**-10:#abs(errold-errnew)>0.01 and n<=10000:
         if errold-errnew<0:
             eps=eps/1
