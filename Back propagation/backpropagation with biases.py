@@ -1,4 +1,4 @@
-import base64
+from math import e
 import numpy as np
 import matplotlib.pylab as plt
 import keyboard
@@ -14,10 +14,10 @@ tset=[[113.11902730375427,153.04650170648463,175.46373720136518,5.0,5.0],[175.0,
 tset2=[[122,200,10,524.3120897791999, 533.6532256],[100, 100, 180,456.66741616, 510.14936],[20, 230, 18,352.413101372, 322.139278],[50, 50, 50, 202.74761647999998, 221.4676],[220, 130, 110, 704.902035172, 781.224002]]
 #rgb zahlen/255
 def f(x):
-    return x
+    return 1/(1+e**(-10*x+5))
 
 def fder(x):
-    return 1
+    return (e**10*x+5)/((1+e**10*x+5)**2)
 
 def evalnn(rgb):
     re=f(f(f(rgb[0]*W[0]+B[0])*W[3]+f(rgb[1]*W[1]+B[1])*W[4]+f(rgb[2]*W[2]+B[2])*W[5]+B[3])*W[12]+
@@ -408,6 +408,8 @@ def train(set,eps):
     while ctt(set)>100.0 and  keyboard.is_pressed('q')==False:# and n<100000 :#and eps>10**-10:#abs(errold-errnew)>0.01 and n<=10000:
         if errold-errnew<0:
             eps=eps/2
+        elif errold==errnew:
+            eps*=2
         W,B,change,leng =adjustment(set,eps)
         errold=errnew
         errnew=ctt(set)
