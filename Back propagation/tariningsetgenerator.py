@@ -6,7 +6,7 @@ import os
 
 b=np.array([0.95764,0.45682,0.52884,0.4,0.566,1.23])
 a=np.array([1.09934,0.9454,0.345,0.8993,0.3452,0.0345,1.236,0.4444,0.555])
-rgb=[[]]
+rgb=[]
 B=np.random.rand(8,1)
 W=np.random.rand(18,1)
 print(B,W)
@@ -23,10 +23,10 @@ def evalnn(rgb):
 
 
 def f(x):
-    return 1/(1+e**(-10*x+5))
+    return 1/(1+e**(-x))#x#1/(1+e**(-10*x+5))
 
 def fder(x):
-    return (e**10*x+5)/((1+e**10*x+5)**2)
+    return (e**x)/((1+e**x)**2)#1#(e**10*x+5)/((1+e**10*x+5)**2)
 
 def evalnnWB(rgb):
     re=f(f(f(rgb[0]*W[0]+B[0])*W[3]+f(rgb[1]*W[1]+B[1])*W[4]+f(rgb[2]*W[2]+B[2])*W[5]+B[3])*W[12]+
@@ -46,6 +46,6 @@ def eval():
     df = pd.DataFrame([rgb] )#columns=["R", "G",'B','re','li'])  # doctest: +SKIP
     '''with pd.ExcelWriter("D:training sets.xlsx",mode='a',if_sheet_exists='overlay') as writer:
         df.to_excel(writer)  # doctest: +SKIP'''
-    for g in range(101):
+    for g in range(100):
         print(rgb[g])
 eval()
