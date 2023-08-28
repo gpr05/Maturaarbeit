@@ -18,7 +18,7 @@ def f(x):
     return 1/(1+e**(-x))#1/(1+e**(-10*x+5))
 
 def fder(x):
-    return (e**x)/((1+e**x)**2)#(e**10*x+5)/((1+e**10*x+5)**2)
+    return (e**(-x))/((1+e**(-x))**2)#(e**10*x+5)/((1+e**10*x+5)**2)
 
 def evalnn(rgb):
     re=f(f(f(rgb[0]*W[0]+B[0])*W[3]+f(rgb[1]*W[1]+B[1])*W[4]+f(rgb[2]*W[2]+B[2])*W[5]+B[3])*W[12]+
@@ -406,7 +406,7 @@ def train(set,eps):
     B=None
     n=0
     H=[]
-    while ctt(set)>0.0 and  keyboard.is_pressed('q')==False:# and n<100000 :#and eps>10**-10:#abs(errold-errnew)>0.01 and n<=10000:
+    while ctt(set)>0.0 and keyboard.is_pressed('q')==False:# and n<100000 :#and eps>10**-10:#abs(errold-errnew)>0.01 and n<=10000:
         if errold-errnew<0:
             eps/=1
         elif errold==errnew:
