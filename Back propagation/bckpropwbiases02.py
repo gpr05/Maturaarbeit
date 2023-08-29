@@ -1,4 +1,4 @@
-from math import e
+from math import exp
 import numpy as np
 import matplotlib.pylab as plt
 import keyboard
@@ -16,10 +16,10 @@ tset3=[[187.3485634048458, 150.06230039857118, 102.96892854620899,0.91907491, 0.
 tset4=[[46.14942747766261, 247.36208389705283, 74.08030744641174, 0.81659393, 0.91809978],[133.33315332807823, 117.71784034715313, 108.35543734187672, 0.81659393, 0.91809978],[197.66346409625467, 183.56815506745406, 134.3071830935232, 0.81659393, 0.91809978],[189.02759701085495, 82.06516146029526, 49.941384305976115, 0.81659393, 0.91809978],[207.77045285493006, 28.652714608810204, 117.00318360637586, 0.81659393, 0.91809978],[217.06198467287302, 254.42309173931255, 113.27118072812857, 0.81659393, 0.91809978],[200.69802924376225, 150.14609728332036, 24.68228158639408, 0.81659393, 0.91809978],[104.50758209407022, 213.72096341760204, 80.64609595214219, 0.81659393, 0.91809978],[234.60614035888858, 92.50591927648051, 169.84191157618739, 0.81659393, 0.91809978],[192.15905854374887, 23.788168811017936, 152.64503882316762, 0.81659393, 0.91809978],[135.02355074609744, 115.45833034239008, 125.95283619782644, 0.81659393, 0.91809978],[215.5057541073719, 221.50080521570374, 83.85481371566169, 0.81659393, 0.91809978],[183.52959442689735, 200.9138247697748, 135.5292693627817, 0.81659393, 0.91809978],[195.34023292787631, 123.34621893684788, 107.18389635903542, 0.81659393, 0.91809978],[179.6591004825346, 201.39125956349358, 241.52247183974075, 0.81659393, 0.91809978]]
 #rgb zahlen/255
 def f(x):
-    return x#1/(1+e**(-x))#1/(1+e**(-10*x+5))
+    return x#* 1/(1+exp(-x))#1/(1+e**(-10*x+5))
 
 def fder(x):
-    return 1# (e**(x))/((1+e**(-x))**2)#(e**10*x+5)/((1+e**10*x+5)**2)
+    return 1#(exp(-x))/((1+exp(-x))**2)#(e**10*x+5)/((1+e**10*x+5)**2)
 
 def H0pre(inp):
     return inp[0]*W[0]+inp[1]*W[1]+inp[2]*W[2]+B[0]
@@ -68,35 +68,35 @@ def ctt(tval):
 
 def gradc(tval):
     inp=[0.0,0.0,0.0]
-    tval[0:3]=inp[0:3]
+    inp[0:3]=tval[0:3]
     ret=tval[3]
     lit=tval[4]
     gradW=np.zeros((15,1))
     gradB=np.zeros((5,1))
     re,li=evalnn(tval[0:3])
 
-    gradW[0]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*inp[0]*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*inp[0]*W[12]
-    gradW[1]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*inp[1]*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*inp[1]*W[12]
-    gradW[2]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*inp[2]*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*inp[2]*W[12]
-    gradW[3]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*inp[0]*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*inp[0]*W[13]
-    gradW[4]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*inp[1]*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*inp[1]*W[13]
-    gradW[5]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*inp[2]*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*inp[2]*W[13]
-    gradW[6]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*inp[0]*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*inp[0]*W[14]
-    gradW[7]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*inp[1]*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*inp[1]*W[14]
-    gradW[8]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*inp[2]*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*inp[2]*W[14]
+    gradW[0]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H0pre(inp)))*inp[0]*W[9]  +(li-lit)*float(fder(O1pre(inp)))*float(fder(H0pre(inp)))*inp[0]*W[12]
+    gradW[1]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H0pre(inp)))*inp[1]*W[9]  +(li-lit)*float(fder(O1pre(inp)))*float(fder(H0pre(inp)))*inp[1]*W[12]
+    gradW[2]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H0pre(inp)))*inp[2]*W[9]  +(li-lit)*float(fder(O1pre(inp)))*float(fder(H0pre(inp)))*inp[2]*W[12]
+    gradW[3]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H1pre(inp)))*inp[0]*W[10] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H1pre(inp)))*inp[0]*W[13]
+    gradW[4]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H1pre(inp)))*inp[1]*W[10] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H1pre(inp)))*inp[1]*W[13]
+    gradW[5]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H1pre(inp)))*inp[2]*W[10] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H1pre(inp)))*inp[2]*W[13]
+    gradW[6]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H2pre(inp)))*inp[0]*W[11] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H2pre(inp)))*inp[0]*W[14]
+    gradW[7]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H2pre(inp)))*inp[1]*W[11] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H2pre(inp)))*inp[1]*W[14]
+    gradW[8]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H2pre(inp)))*inp[2]*W[11] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H2pre(inp)))*inp[2]*W[14]
 
-    gradW[9]= (re-ret)*float(fder(O0pre))*float(H0(inp))
-    gradW[10]=(re-ret)*float(fder(O0pre))*float(H1(inp))
-    gradW[11]=(re-ret)*float(fder(O0pre))*float(H2(inp))
-    gradW[12]=(li-lit)*float(fder(O1pre))*float(H0(inp))
-    gradW[13]=(li-lit)*float(fder(O1pre))*float(H1(inp))
-    gradW[14]=(li-lit)*float(fder(O1pre))*float(H2(inp))
+    gradW[9]= (re-ret)*float(fder(O0pre(inp)))*float(H0(inp))
+    gradW[10]=(re-ret)*float(fder(O0pre(inp)))*float(H1(inp))
+    gradW[11]=(re-ret)*float(fder(O0pre(inp)))*float(H2(inp))
+    gradW[12]=(li-lit)*float(fder(O1pre(inp)))*float(H0(inp))
+    gradW[13]=(li-lit)*float(fder(O1pre(inp)))*float(H1(inp))
+    gradW[14]=(li-lit)*float(fder(O1pre(inp)))*float(H2(inp))
 
-    gradB[0]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*W[12]
-    gradB[1]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*W[13]
-    gradB[2]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*W[14]
-    gradB[3]= (re-ret)*float(fder(O0pre))
-    gradB[4]= (li-lit)*float(fder(O1pre))
+    gradB[0]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H0pre(inp)))*W[9]  +(li-lit)*float(fder(O1pre(inp)))*float(fder(H0pre(inp)))*W[12]
+    gradB[1]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H1pre(inp)))*W[10] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H1pre(inp)))*W[13]
+    gradB[2]= (re-ret)*float(fder(O0pre(inp)))*float(fder(H2pre(inp)))*W[11] +(li-lit)*float(fder(O1pre(inp)))*float(fder(H2pre(inp)))*W[14]
+    gradB[3]= (re-ret)*float(fder(O0pre(inp)))
+    gradB[4]= (li-lit)*float(fder(O1pre(inp)))
     return gradW, gradB
 def gradctot(tval):
 
@@ -108,14 +108,47 @@ def gradctot(tval):
         gradBtot+=gradB
     return gradWtot, gradBtot
 
+def epschange(val,eps):
+    tot=np.zeros((20,1))
+    Wadj,Badj=gradctot(val)
+    tot[:15]=Wadj
+    tot[15:]=Badj
+    lengh=np.linalg.norm(tot)
+    Wnew=np.zeros((15,1))
+    Bnew=np.zeros((5,1))
+    Wnew[0:]=W[0:]
+    Bnew[0:]=B[0:]
+    Wnew[0]=W[0]-(Wadj[0]/lengh)*eps
+    Wnew[1]=W[1]-(Wadj[1]/lengh)*eps
+    Wnew[2]=W[2]-(Wadj[2]/lengh)*eps
+    Wnew[3]=W[3]-(Wadj[3]/lengh)*eps
+    Wnew[4]=  W[4]-(Wadj[4]/lengh)*eps
+    Wnew[5]=  W[5]-(Wadj[5]/lengh)*eps
+    Wnew[6]=  W[6]-(Wadj[6]/lengh)*eps
+    Wnew[7]=  W[7]-(Wadj[7]/lengh)*eps
+    Wnew[8]=  W[8]-(Wadj[8]/lengh)*eps
+    Wnew[9]=  W[9]-(Wadj[9]/lengh)*eps
+    Wnew[10]=W[10]-(Wadj[10]/lengh)*eps
+    Wnew[11]=W[11]-(Wadj[11]/lengh)*eps
+    Wnew[12]=W[12]-(Wadj[12]/lengh)*eps
+    Wnew[13]=W[13]-(Wadj[13]/lengh)*eps
+    Wnew[14]=W[14]-(Wadj[14]/lengh)*eps
+    Bnew[0]=  B[0]-(Badj[0]/lengh)*eps
+    Bnew[1]=  B[1]-(Badj[2]/lengh)*eps
+    Bnew[2]=  B[2]-(Badj[2]/lengh)*eps
+    Bnew[3]=  B[3]-(Badj[3]/lengh)*eps
+    Bnew[4]=  B[4]-(Badj[4]/lengh)*eps
+    return Wnew,Bnew
 def adjustment(val,eps):
-    c=W
-    d=B
+    Wold=np.zeros((15,1))
+    Bold=np.zeros((5,1))
+    Wold[0:]=W[0:]
+    Bold[0:]=B[0:]
     tot=np.zeros((20,1))
     Wadj,Badj=gradctot(val)
     tot[0:15]=Wadj
     tot[15:20]=Badj
-    lengh=np.linalg.norm(tot)
+    lengh=np.linalg.norm(tot) #in a new function to determine Wheter to divide epsilon
     W[0]=W[0]-(Wadj[0]/lengh)*eps
     W[1]=W[1]-(Wadj[1]/lengh)*eps
     W[2]=W[2]-(Wadj[2]/lengh)*eps
@@ -136,7 +169,7 @@ def adjustment(val,eps):
     B[2]=  B[2]-(Badj[2]/lengh)*eps
     B[3]=  B[3]-(Badj[3]/lengh)*eps
     B[4]=  B[4]-(Badj[4]/lengh)*eps
-    middelta=(np.mean(W-c)+np.mean(B-d))/2
+    middelta=(np.mean(W-Wold)+np.mean(B-Bold))/2
     return W,B,middelta, lengh
 
 def train(set,eps):
@@ -147,13 +180,13 @@ def train(set,eps):
     n=0
     H=[]
     while ctt(set)>0.0 and keyboard.is_pressed('q')==False:# and n<100000 :#and eps>10**-10:#abs(errold-errnew)>0.01 and n<=10000:
-        if errold-errnew<0:
-            eps/=1
-        elif errold==errnew:
-            eps*=1
-        W,B,change,leng =adjustment(set,eps)
+        errnew=2*errold
+        while errnew> errold:
+            epschange(set,eps)
+            errnew=ctt(set)
         errold=errnew
         errnew=ctt(set)
+        W,B,change,leng =adjustment(set,eps)
         #pandas.
         print([n,change,float(errnew), leng, eps])
         H.append([float(errnew),leng])
@@ -166,7 +199,7 @@ def train(set,eps):
     plt.plot(H)
     plt.show()
     return W,B
-print(train(tset4,0.0001))
+print(train(tset4,0.01))
 #print(adjustment(tset,0.1))
 '''for i in tset3:
    print(evalnn(i[0:3]))'''
