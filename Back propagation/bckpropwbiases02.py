@@ -40,13 +40,13 @@ def H2(inp):
     return f(H2pre(inp))
 
 def O0pre(inp):
-    return H0(inp)*W[9]+H1(inp)*W[10]+H2(inp)*W[11]+B[3]
+    return float(H0(inp))*W[9]+float(H1(inp))*W[10]+float(H2(inp))*W[11]+B[3]
 
 def O0(inp):
     return f(O0pre(inp))
 
 def O1pre(inp):
-    return H0(inp)*W[12]+H1(inp)*W[13]+H2(inp)*W[14]+B[4]
+    return float(H0(inp))*W[12]+float(H1(inp))*W[13]+float(H2(inp))*W[14]+B[4]
 
 def O1(inp):
     return f(O1pre(inp))
@@ -75,33 +75,33 @@ def gradc(tval):
     gradB=np.zeros((5,1))
     re,li=evalnn(tval[0:3])
 
-    gradW[0]= (re-ret)*fder(O0pre)*fder(H0pre)*inp[0]*W[9]  +(li-lit)*fder(O1pre)*fder(H0pre)*inp[0]*W[12]
-    gradW[1]= (re-ret)*fder(O0pre)*fder(H0pre)*inp[1]*W[9]  +(li-lit)*fder(O1pre)*fder(H0pre)*inp[1]*W[12]
-    gradW[2]= (re-ret)*fder(O0pre)*fder(H0pre)*inp[2]*W[9]  +(li-lit)*fder(O1pre)*fder(H0pre)*inp[2]*W[12]
-    gradW[3]= (re-ret)*fder(O0pre)*fder(H1pre)*inp[0]*W[10] +(li-lit)*fder(O1pre)*fder(H1pre)*inp[0]*W[13]
-    gradW[4]= (re-ret)*fder(O0pre)*fder(H1pre)*inp[1]*W[10] +(li-lit)*fder(O1pre)*fder(H1pre)*inp[1]*W[13]
-    gradW[5]= (re-ret)*fder(O0pre)*fder(H1pre)*inp[2]*W[10] +(li-lit)*fder(O1pre)*fder(H1pre)*inp[2]*W[13]
-    gradW[6]= (re-ret)*fder(O0pre)*fder(H2pre)*inp[0]*W[11] +(li-lit)*fder(O1pre)*fder(H2pre)*inp[0]*W[14]
-    gradW[7]= (re-ret)*fder(O0pre)*fder(H2pre)*inp[1]*W[11] +(li-lit)*fder(O1pre)*fder(H2pre)*inp[1]*W[14]
-    gradW[8]= (re-ret)*fder(O0pre)*fder(H2pre)*inp[2]*W[11] +(li-lit)*fder(O1pre)*fder(H2pre)*inp[2]*W[14]
+    gradW[0]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*inp[0]*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*inp[0]*W[12]
+    gradW[1]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*inp[1]*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*inp[1]*W[12]
+    gradW[2]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*inp[2]*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*inp[2]*W[12]
+    gradW[3]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*inp[0]*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*inp[0]*W[13]
+    gradW[4]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*inp[1]*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*inp[1]*W[13]
+    gradW[5]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*inp[2]*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*inp[2]*W[13]
+    gradW[6]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*inp[0]*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*inp[0]*W[14]
+    gradW[7]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*inp[1]*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*inp[1]*W[14]
+    gradW[8]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*inp[2]*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*inp[2]*W[14]
 
-    gradW[9]= (re-ret)*fder(O0pre)*H0
-    gradW[10]=(re-ret)*fder(O0pre)*H1
-    gradW[11]=(re-ret)*fder(O0pre)*H2
-    gradW[12]=(li-lit)*fder(O1pre)*H0
-    gradW[13]=(li-lit)*fder(O1pre)*H1
-    gradW[14]=(li-lit)*fder(O1pre)*H2
+    gradW[9]= (re-ret)*float(fder(O0pre))*float(H0(inp))
+    gradW[10]=(re-ret)*float(fder(O0pre))*float(H1(inp))
+    gradW[11]=(re-ret)*float(fder(O0pre))*float(H2(inp))
+    gradW[12]=(li-lit)*float(fder(O1pre))*float(H0(inp))
+    gradW[13]=(li-lit)*float(fder(O1pre))*float(H1(inp))
+    gradW[14]=(li-lit)*float(fder(O1pre))*float(H2(inp))
 
-    gradB[0]= (re-ret)*fder(O0pre)*fder(H0pre)*W[9]  +(li-lit)*fder(O1pre)*fder(H0pre)*W[12]
-    gradB[1]= (re-ret)*fder(O0pre)*fder(H1pre)*W[10] +(li-lit)*fder(O1pre)*fder(H1pre)*W[13]
-    gradB[2]= (re-ret)*fder(O0pre)*fder(H2pre)*W[11] +(li-lit)*fder(O1pre)*fder(H2pre)*W[14]
-    gradB[3]= (re-ret)*fder(O0pre)
-    gradB[4]= (li-lit)*fder(O1pre)
+    gradB[0]= (re-ret)*float(fder(O0pre))*float(fder(H0pre))*W[9]  +(li-lit)*float(fder(O1pre))*float(fder(H0pre))*W[12]
+    gradB[1]= (re-ret)*float(fder(O0pre))*float(fder(H1pre))*W[10] +(li-lit)*float(fder(O1pre))*float(fder(H1pre))*W[13]
+    gradB[2]= (re-ret)*float(fder(O0pre))*float(fder(H2pre))*W[11] +(li-lit)*float(fder(O1pre))*float(fder(H2pre))*W[14]
+    gradB[3]= (re-ret)*float(fder(O0pre))
+    gradB[4]= (li-lit)*float(fder(O1pre))
     return gradW, gradB
 def gradctot(tval):
 
-    gradWtot=np.zeros((18,1))
-    gradBtot=np.zeros((8,1))
+    gradWtot=np.zeros((15,1))
+    gradBtot=np.zeros((5,1))
     for i in tval :#range(3):
         gradW, gradB =gradc(i)
         gradWtot+=gradW
@@ -111,10 +111,10 @@ def gradctot(tval):
 def adjustment(val,eps):
     c=W
     d=B
-    tot=np.zeros((26,1))
+    tot=np.zeros((20,1))
     Wadj,Badj=gradctot(val)
-    tot[0:18]=Wadj
-    tot[17:25]=Badj
+    tot[0:15]=Wadj
+    tot[15:20]=Badj
     lengh=np.linalg.norm(tot)
     W[0]=W[0]-(Wadj[0]/lengh)*eps
     W[1]=W[1]-(Wadj[1]/lengh)*eps
@@ -158,7 +158,7 @@ def train(set,eps):
         print([n,change,float(errnew), leng, eps])
         H.append([float(errnew),leng])
 
-        if n%50==0:
+        if n%500==0:
             plt.plot(H)
             plt.show()
         #print(H[n])
