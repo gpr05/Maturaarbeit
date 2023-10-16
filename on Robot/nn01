@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+from math import exp
+from ev3dev2 import*
+from ev3dev2.motor import LargeMotor,OUTPUT_A,OUTPUT_B, SpeedPercent
+from ev3dev2.sensor import INPUT_2
+from ev3dev2.sensor.lego import ColorSensor
+
+#TODO:
+rm= LargeMotor(OUTPUT_A)
+lm= LargeMotor(OUTPUT_B)
+lf=ColorSensor(INPUT_2)
+
+W=[ 0.22761073,0.31168518,0.98887353,0.41346739,0.28467911,0.76328284,0.62464784,0.44168643,
+        0.17191695,0.01403663,-0.40239056,-0.12775812,-0.6416017 ,-0.23089563,0.13047133]
+B=[ 0.99682834,0.79983418,0.37870556,-0.17703514,0.04887882]
+
+def f(x):
+    return 1/(1+exp(-x))
+
+def H0pre(inp,W,B):
+    return inp[0]*W[0]+inp[1]*W[1]+inp[2]*W[2]+B[0]
+
+def H0(inp,W,B):
+    return f(H0pre(inp,W,B))
+
+def H1pre(inp,W,B):
+    return inp[0]*W[3]+inp[1]*W[4]+inp[2]*W[5]+B[1]
+
+def H1(inp,W,B):
+    return f(H1pre(inp,W,B))
+
+def H2pre(inp,W,B):
+    return inp[0]*W[6]+inp[1]*W[7]+inp[2]*W[8]+B[2]
+
+def H2(inp,W,B):
+    return f(H2pre(inp,W,B))
+
+def O0pre(inp,W,B):
+    return float(H0(inp,W,B))*W[9]+float(H1(inp,W,B))*W[10]+float(H2(inp,W,B))*W[11]+B[3]
+
+def O0(inp,W,B):
+    return f(O0pre(inp,W,B))
+
+def O1pre(inp,W,B):
+    return float(H0(inp,W,B))*W[12]+float(H1(inp,W,B))*W[13]+float(H2(inp,W,B))*W[14]+B[4]
+
+def O1(inp,W,B):
+    return f(O1pre(inp,W,B))
+
+def evalnn(inp,W,B):
+    re=O0(inp,W,B)
+    li=O1(inp,W,B)
+    return re,li
+while True:
+    inp=lf.rgb
+    r,l=evalnn(inp,W,B)
+    rm.on(SpeedPercent(r*10))
+    lm.on(SpeedPercent(l*10))

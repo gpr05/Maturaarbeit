@@ -418,7 +418,7 @@ def train(set,eps):
         print([n,change,float(errnew), leng, eps])
         H.append([float(errnew),leng])
 
-        if n%50==0:
+        if n%5000==0:
             plt.plot(H)
             plt.show()
         #print(H[n])
@@ -426,7 +426,7 @@ def train(set,eps):
     plt.plot(H)
     plt.show()
     return W,B
-print(train(tset3,0.0001))
+print(train(tset2,0.0001))
 #print(adjustment(tset,0.1))
 '''for i in tset3:
    print(evalnn(i[0:3]))'''
