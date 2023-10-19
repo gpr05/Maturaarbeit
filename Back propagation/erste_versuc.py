@@ -2,10 +2,7 @@ import numpy as np
 import matplotlib.pylab as plt
 
 #erste versuch in training
-#
-#b=np.ones((6,1))
-b=np.random.rand(6,1) #np.array([1,1,1,1,1,1])
-#a=np.ones((9,1))#np.array([1,1,1,1,1,1,1,1,1])
+b=np.random.rand(6,1)
 a=np.random.rand(9,1)
 
                         #R                      G               B         re,li
@@ -17,7 +14,6 @@ a=np.random.rand(9,1)
                         #R                      G               B         re,li
 tset=[[113.11902730375427,153.04650170648463,175.46373720136518,5.0,5.0],[175.0,175.0,175.0,5.0,2.0],[100.0,100.0,200.0,2.0,5.0]]
 tset2=[[122,200,10,524.3120897791999, 533.6532256],[100, 100, 180,456.66741616, 510.14936],[20, 230, 18,352.413101372, 322.139278],[50, 50, 50, 202.74761647999998, 221.4676],[220, 130, 110, 704.902035172, 781.224002]]
-#rgb zahlen/255 #1/(1+exp(-10*x+5))#(exp(-10*x+5)*(-10))/((1+exp(-10*x+5)**2))
 
 def evalnn(rgb):
     re=(rgb[0]*a[0]*b[0]+rgb[1]*a[1]*b[0]+rgb[2]*a[2]*b[0]+
@@ -72,29 +68,7 @@ def gradctot(tval):
         grada, gradb =gradc(i)
         gradatot+=grada
         gradbtot+=gradb
-        '''
-        R=tval[i][0]
-        G=tval[i][1]
-        B=tval[i][2]
-        ret=tval[i][3]
-        lit=tval[i][4]
-        re,li=evalnn(tval[i][0:3])
-        gradbtot[0]+=(re-ret)*(R*a[0]+G*a[1]+B*a[2])+(li-lit)*0
-        gradbtot[1]+=(re-ret)*(R*a[3]+G*a[4]+B*a[5])
-        gradbtot[2]+=(re-ret)*(R*a[6]+G*a[7]+B*a[8])
-        gradbtot[3]+=(li-lit)*(R*a[0]+G*a[1]+B*a[2])
-        gradbtot[4]+=(li-lit)*(R*a[3]+G*a[4]+B*a[5])
-        gradbtot[5]+=(li-lit)*(R*a[6]+G*a[7]+B*a[8])
 
-        gradatot[0]+=(re-ret)*R*b[0]+(li-lit)*R*b[3]
-        gradatot[1]+=(re-ret)*G*b[0]+(li-lit)*G*b[3]
-        gradatot[2]+=(re-ret)*B*b[0]+(li-lit)*B*b[3]
-        gradatot[3]+=(re-ret)*R*b[1]+(li-lit)*R*b[4]
-        gradatot[4]+=(re-ret)*G*b[1]+(li-lit)*G*b[4]
-        gradatot[5]+=(re-ret)*B*b[1]+(li-lit)*B*b[4]
-        gradatot[6]+=(re-ret)*R*b[2]+(li-lit)*R*b[5]
-        gradatot[7]+=(re-ret)*G*b[2]+(li-lit)*G*b[5]
-        gradatot[8]+=(re-ret)*B*b[2]+(li-lit)*B*b[5]'''
     return gradatot, gradbtot
 
 def adjustment(val,eps):
@@ -131,7 +105,7 @@ def train(set,eps):
     b=None
     n=0
     H=[]
-    while ctt(set)>0.0 and eps>10**-16:#abs(errold-errnew)>0.01 and n<=10000:
+    while ctt(set)>0.0 and eps>10**-16:
         if errold-errnew<0:
             eps=eps/2
         a,b,change,leng =adjustment(set,eps)
@@ -143,14 +117,12 @@ def train(set,eps):
         if n%10000==0:
             plt.plot(H)
             plt.show()
-        #print(H[n])
         n+=1
     plt.plot(H)
     plt.show()
     return a,b
 
 print(train(tset2,20))
-#print(adjustment(tset,0.1))
 print(evalnn(tset2[0][0:3]))
 print(evalnn(tset2[1][0:3]))
 print(evalnn(tset2[2][0:3]))

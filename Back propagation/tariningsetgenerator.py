@@ -78,9 +78,6 @@ def eval(k):
         for r in range(3):
             d[r]=np.random.random()*255
         rgb.append([evalnn3(d)])
-    df = pd.DataFrame([rgb] )#columns=["R", "G",'B','re','li'])  # doctest: +SKIP
-    '''with pd.ExcelWriter("D:training sets.xlsx",mode='a',if_sheet_exists='overlay') as writer:
-        df.to_excel(writer)  # doctest: +SKIP'''
     for g in range(k):
         print(rgb[g])
-eval(15)
+eval(25)

@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+from ev3dev2 import*
+from ev3dev2.motor import LargeMotor,OUTPUT_A,OUTPUT_B, SpeedPercent
+from ev3dev2.sensor import INPUT_2
+from ev3dev2.sensor.lego import ColorSensor
+#TODO:
+rm= LargeMotor(OUTPUT_A)
+lm= LargeMotor(OUTPUT_B)
+lf=ColorSensor(INPUT_2)
+x=5
+
+while True:
+    value=lf.reflected_light_intensity
+    if value> x:
+        lm.on(SpeedPercent(20))
+        rm.on(SpeedPercent(-20))
+    elif value==x:
+        lm.on(SpeedPercent(20))
+        rm.on(SpeedPercent(20))
+    else:
+        lm.on(SpeedPercent(-20))
+        rm.on(SpeedPercent(20))

@@ -107,7 +107,7 @@ def gradctot(tval,W,B):
         gradBtot+=gradB
     return gradWtot, gradBtot
 
-def adjustment(val,eps,Wadj,Badj):
+def adjustment(eps,Wadj,Badj):
     global Wg,Bg
     W=np.zeros((15,1))
     B=np.zeros((5,1))
@@ -150,11 +150,11 @@ def train(set):
     H=[]
     errold=ctt(set,Wg,Bg)
     errnew=2*errold
-    while ctt(set,Wg,Bg)>1e-35 and keyboard.is_pressed('q')==False and eps>=1e-100:
+    while ctt(set,Wg,Bg)>1e-50 and keyboard.is_pressed('q')==False and eps>=1e-300:
         Wadj,Badj=gradctot(set,Wg,Bg)
         eps=1
-        while errnew>=errold and eps>=1e-100:
-            W,B,change,leng=adjustment(set, eps,Wadj,Badj)
+        while errnew>=errold and eps>=1e-300:
+            W,B,change,leng=adjustment(eps,Wadj,Badj)
             errnew=ctt(set,W,B)
             eps/=2
 
